@@ -1,0 +1,103 @@
+<?
+//phpinfo();
+//exit;
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, width=device-width">
+<title>그룹채팅</title>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
+<link rel="stylesheet" href="css/style.css" />
+<script type="text/javascript" src="js/main.js"></script>
+<style type="text/css">
+	/* 게임 월드컵 */
+	body{overflow:hidden;}
+	.worldcup_box{height:200px;background:#00F;text-align:center;width:90%;z-index:99999;margin:48px auto 0 auto;}
+	.worldcup_box .worldcup_img{overflow:hidden;}
+	.worldcup_box .worldcup_img li{width:25%;float:left;padding:5px 0;}
+	.worldcup_box .worldcup_img li img{width:70px;}
+	.vs_box{display:block;color:#F00;font-weight:bold;padding:7px 3px;}
+	.vs_box img{width:70px;vertical-align:middle;}
+	.worldcup_start{background:#ffff00;padding-top:15px;position:fixed;bottom:0;left:0;width:100%;height:60%;z-index:99999;}
+	.worldcup_btn{background:#F00;width:60%;margin:0 auto;padding:10px;text-align:center;color:#FFF;}
+</style>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		var lastScroll = "A";
+		$( window ).scroll(function() {
+			if(lastScroll === "A"){
+				$(".worldcup_start").stop().animate({ bottom: "-=365" }, 500);
+				lastScroll = "B";
+			}
+		});
+		//메뉴바
+		$(".worldcup_btn").click(function(){
+			$(".worldcup_start").stop().animate({ bottom: "-=365" }, 500);
+			$( "body" ).scrollTop( 200 );
+		});
+	});
+</script>
+</head>
+<body>
+	<div class="worldcup_box">
+		친구과 골라보는 너의 이상형은? 에 해당하는 이미지
+		<ul class="worldcup_img">
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+			<li><img src="images/kakao_2.jpg" alt="" /></li>
+		</ul>
+	</div>
+	<div class="wrap">
+		<nav>
+			<h1>그룹채팅</h1>
+			<a href="javascript:;" class="go-home">홈으로 가기</a>
+		</nav>
+		<div class="chat_box">
+			<article id="chatMessageList">
+				<div class="answer talk-zone">
+					<span class="reporter"><span class="profile"></span>이름</span>
+					<p><span class="vs_box"><img src="images/kakao_2.jpg" alt="첫번째" /> vs <img src="images/kakao_2.jpg" alt="두번째" /></span></p>
+				</div>
+				<div class="question talk-zone">
+					<p>1</p>
+				</div>
+				<div class="answer talk-zone">
+					<span class="reporter"><span class="profile"></span>이름</span>
+					<p>ㅋㅋㅋㅋ<br />브라보! 브라보!! (박수 이모티콘)<br />눈이 높구나!<br />바로 만나러 갈래?<br /><span class="vs_box"><img src="images/kakao_2.jpg" alt="두번째" /></span><a href="javascript:;">만나러 가기</a></p>
+				</div>
+				<div class="question talk-zone">
+					<p>2</p>
+				</div>
+				<div class="answer talk-zone">
+					<span class="reporter"><span class="profile"></span>이름</span>
+					<p>3</p>
+				</div>
+				<div class="question talk-zone">
+					<p>3</p>
+				</div>
+
+			</article>
+		</div>
+		<footer>
+			<span class="btn-foot">더보기</span>
+			<div class="foot-input">
+				<textarea class="url-copy"></textarea>
+				<p class="share-text selected"></p>
+			</div>
+		</footer>
+		<div class="worldcup_start">
+			<p class="worldcup_btn">바로 시작하기</p>
+		</div>
+	</div>
+</body>
+</html>
