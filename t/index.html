@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>dothome/t</title>
+	<!-- <script src='//plugin.adplex.co.kr/script/2beonAdScript.js' charset='UTF-8'></script> -->
+	<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
+</head>
+<body>
+<script>
+
+// 구버전 
+// var init2beon = init2beon||{mdcode:'ZDFFFFFP', setZone:[], isBridgeAd:false}, arrZone=init2beon['setZone'];
+// arrZone.push(['QI4LLLLF', '_2BEONQI4LLLLF']);
+// console.log(init2beon);
+
+//하드코딩html 감싸고있는 div 걷어내기 
+// var targetEl = document.getElementById('bb');
+// var parent = targetEl.parentNode;
+// targetElement.innerHTML = targetEl.innerHTML;
+
+console.log('시작');
+(()=>{
+
+	//함수 호출 
+	window.adtiveDrawAD=window.adtiveDrawAD||function(md_key,zone_key,passback,callback){
+
+		// 영역데이터 가져오기
+		getBannerData(md_key,zone_key);
+
+		// 데이터 재구성
+		// 영역생성
+		// 배너 돔에 추가 
+
+
+		var elmId='_2BEON'+zone_key;
+console.warn(elmId);
+
+	}
+	//영역데이터 처리 
+	adtiveDrawBanner=function(jsonData,zone_key,zone_id,callbackID){
+
+console.warn(jsonData);
+
+	}
+
+	function getBannerData(md_key,zone_key){
+console.warn('getBannerData => '+md_key+' / '+zone_key);
+console.warn(adtiveBanner.log_host);
+		//필수항목체크 
+		if( !((typeof md_key!=='' && typeof zone_key!=='undefined') || (md_key!='' && zone_key!='')) ){
+console.warn('필수체크');
+			return;
+		}
+console.warn('필수체크 통과');
+		adtiveBanner.md_key=md_key;
+		//데이터 호출 
+		var zone_id='';
+		var _url=adtiveBanner.log_host+'/getBannerInfo_json.php?md_key='+md_key+'&zone_keys='+zone_key+'&md_domain='+document.domain+'&is_drawAD=1&zone_id='+zone_id;
+		load_js(_url); //js호출방식으로 소재데이터 로드 
+	}
+
+	function load_js(url){
+	    var scriptRef = document.createElement('script');
+	    scriptRef.setAttribute('src',url);
+	    document.head.appendChild(scriptRef);
+	}
+
+	var usrProtocol=(document.location.protocol==='https:')?'https://':'http://';
+	//기본설정 셋팅 
+	var adtiveBanner={
+		plugin_host:usrProtocol+'plugin.adplex.co.kr',
+		log_host:usrProtocol+'log.adplex.co.kr',
+		md_key:'',
+		getBannerInfo:function(){
+
+		}
+	}
+
+
+
+
+
+
+
+
+	//매체/영역 데이터 가져오기 
+	//데이터 재구성 
+	//영역 생성 
+	//위치에 배너 생성 
+
+
+
+})();
+console.log('끝');
+
+</script>
+
+<ul>
+	<li>
+		1
+		<!-- <div id='_2BEONQI4LLLLF'></div> -->
+	</li>
+	<li>2</li>
+	<li id="tt">3
+		<script>try{adtiveDrawAD('ZDFFFFFP','QI4LLLLF',()=>{ alert('passback');},()=>{ alert('callback');});}catch(e){console.warn(e);}</script>
+	</li>
+	<li>4</li>
+	<li id="aaa"><span>5</span></li>
+</ul>
+
+
+
+
+</body>
+</html>
