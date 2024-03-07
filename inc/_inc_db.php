@@ -305,6 +305,5 @@
 		}
 	}
 
-	$DB = NEW DB();
-	//$DB_stats = NEW DB("121.254.208.190", "2beon", "--doemxlqmrnd!@", "stats");
+	$DB = NEW DB();	
 ?>
