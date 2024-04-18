@@ -21,50 +21,77 @@
 // targetElement.innerHTML = targetEl.innerHTML;
 
 console.log('시작');
+
 (()=>{
 
 	//함수 호출 
 	window.adtiveDrawAD=window.adtiveDrawAD||function(md_key,zone_key,passback,callback){
 
+		//passback, callback 처리 
+
+		// adtiveBanner.passback
+		// adtiveBanner.callback
+
+
+		console.warn(typeof passback, passback);
+
+		// 패스백 
+		if(typeof passback==='function'){
+			passback();
+		}
+
+		// 콜백
+		console.warn(typeof callback, callback);
+		if(typeof callback==='function'){
+			callback();
+		}
+
 		// 영역데이터 가져오기
 		getBannerData(md_key,zone_key);
 
-		// 데이터 재구성
-		// 영역생성
-		// 배너 돔에 추가 
-
-
-		var elmId='_2BEON'+zone_key;
-console.warn(elmId);
-
+		
 	}
 	//영역데이터 처리 
-	adtiveDrawBanner=function(jsonData,zone_key,zone_id,callbackID){
-
-console.warn(jsonData);
-
+	window.adtiveDrawBanner=function(jsonData,zone_key,zone_id,callbackID){
+		
+console.warn('adtiveDrawBanner => ',jsonData);
+		// 데이터 재구성
+		
+		
+		// 영역생성
+		// 배너 돔에 추가 
 	}
-
+	
 	function getBannerData(md_key,zone_key){
 console.warn('getBannerData => '+md_key+' / '+zone_key);
 console.warn(adtiveBanner.log_host);
+		
+		
 		//필수항목체크 
 		if( !((typeof md_key!=='' && typeof zone_key!=='undefined') || (md_key!='' && zone_key!='')) ){
-console.warn('필수체크');
+			console.warn('필수체크값 걸림');
 			return;
 		}
-console.warn('필수체크 통과');
-		adtiveBanner.md_key=md_key;
+console.warn('필수체크값 통과');
+adtiveBanner.md_key=md_key;		
+		
+		var elmId='_2BEON'+zone_key;
+		//배너호출 스크립트 다음에 요소 생성 
+		document.currentScript.insertAdjacentHTML("afterend","<div id='"+elmId+"'></div>");
+console.warn('elmId => ', elmId);
+
+		
 		//데이터 호출 
 		var zone_id='';
 		var _url=adtiveBanner.log_host+'/getBannerInfo_json.php?md_key='+md_key+'&zone_keys='+zone_key+'&md_domain='+document.domain+'&is_drawAD=1&zone_id='+zone_id;
+		
 		load_js(_url); //js호출방식으로 소재데이터 로드 
 	}
 
 	function load_js(url){
-	    var scriptRef = document.createElement('script');
-	    scriptRef.setAttribute('src',url);
-	    document.head.appendChild(scriptRef);
+		var scriptRef = document.createElement('script');
+		scriptRef.setAttribute('src',url);
+		document.head.appendChild(scriptRef);
 	}
 
 	var usrProtocol=(document.location.protocol==='https:')?'https://':'http://';

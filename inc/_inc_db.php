@@ -50,7 +50,7 @@
 
 	    #establish db connection
 	    //"58.180.82.104", "2beon", "2beon0221&*", "2beon")
-	    public function __construct($host="localhost", $user="jjong1231", $pass="dbconn1!!", $db="jjong1231")
+	    public function __construct($host="localhost", $user="jjong1231", $pass="dh779859!", $db="jjong1231")
 	    {
 	        $this->connection = new mysqli($host, $user, $pass, $db);
 	        $this->connection->query("SET NAMES 'utf8'");
