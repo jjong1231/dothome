@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dsp Script</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        
+(function(w){
+    "use strict"
+
+    var doc = w.document;
+
+    //디바이스 정보 
+    var UA=(function(){
+        var ua=navigator.userAgent.toLowerCase();
+        var res={
+            touchDevice:('ontouchstart' in window),
+            mobile:Boolean(ua.match(/iphone|ipad|android|mobile/)!=null),
+            appleDevice:Boolean(ua.match(/ mac os /)!=null),
+            ie:Boolean(ua.match(/trident|msie/)!=null),
+            chrome:Boolean(ua.match(/chrome/)!=null)
+        };
+        res.safari=Boolean(ua.match(/safari/)!=null&&!res.chrome);
+        return res;
+    })();
+
+    var adtiveDSP={
+        //초기화 설정 
+        init:function(){
+            var that=this;
+            var styleEl=doc.createElement('style');
+            var cssText='';
+        },
+    }
+
+    console.log(1, UA);
+    
+    $(function(){
+
+        // $('#rs').text(JSON.stringify(UA));
+    });
+    
+    
+    
+    
+    
+    
+})(window);
+
+console.log(2);
+
+        var a = '123';
+        var a = '456';
+        
+        console.log('aaa' , a);
+
+    </script>
+
+</head>
+<body>
+    <div id="rs"></div>
+
+<hr>
+<link rel="stylesheet" href="img_top.css">
+<div class="thumbnail">
+    <div class="text">
+        <h2>Thumbnail Title</h2>
+        <p>This is a description of the thumbnail.</p>
+    </div>
+    <div class="image-container">
+        <img src="400x320.JPG" alt="Thumbnail Image">
+    </div>
+</div>
+
+</body>
+</html>

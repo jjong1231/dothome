@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thumbnail Layouts</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .box {
+        height: 100px;
+        border: 1px solid #000;
+      }
+      /*
+      336x280
+      
+      img   210
+      gap   5
+      text  65
+
+      
+      */
+
+      #zone {
+        font-family: Arial, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 280px;
+        background-color: #fff;
+      }
+
+      .container {
+        /* display: flex; */
+        /* flex-direction: column; */
+        /* gap: 20px; */
+      }
+
+      .thumbnail-layout.vertical {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .thumbnail-layout img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .thumbnail-layout.vertical img {
+        width: 100%;
+        height: 210px;
+      }
+
+      .thumbnail-layout .text {
+        /* padding: 10px; */
+        font-size: 16px;
+        color: #333;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 65px;
+      }
+      p {
+        width: 336px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        text-align: center;
+      }
+
+      .gap {
+        height: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">box1</div>
+
+    <div id="zone">
+      <div class="container">
+        <div class="thumbnail-layout vertical">
+          <img
+            src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+            alt="Image 1"
+          />
+          <div class="gap"></div>
+          <div class="text">
+            <p>
+              This is the text below the iThis is the text below the iThis is
+              the text below the image<br />.This is the text below the
+              image.This is the text below the image.This is the text below the
+              image.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="box">box2</div>
+  </body>
+</html>

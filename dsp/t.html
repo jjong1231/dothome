@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2x2 Thumbnail Grid</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    /* min-height: 100vh; */
+    height: 250px;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, auto);
+    gap: 3px;
+    width: 90%;
+    max-width: 1200px;
+}
+
+.card {
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container {
+    width: 100%;
+    height: 90px;    /* 고정된 높이 */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-container img {
+    width: 142px;
+    height: 90px;
+    object-fit: cover;
+}
+
+.text {
+    padding-top: 2px;
+    text-align: center;
+    line-height: 16px;
+}
+
+    </style>
+</head>
+<body>
+    <div class="grid-container">
+        <div class="card">
+            <div class="image-container">
+                <img src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif" alt="Thumbnail Image 2">
+            </div>
+            <div class="text">
+                <span>썸네일 텍스트<br>테스트중입니다..</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="image-container">
+                <img src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif" alt="Thumbnail Image 2">
+            </div>
+            <div class="text">
+                <span>썸네일 텍스트<br>테스트중입니다..</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="image-container">
+                <img src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif" alt="Thumbnail Image 2">
+            </div>
+            <div class="text">
+                <span>썸네일 텍스트<br>테스트중입니다..</span>
+            </div>
+        </div>
+        <div class="card">
+            <div class="image-container">
+                <img src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif" alt="Thumbnail Image 2">
+            </div>
+            <div class="text">
+                <span>썸네일 텍스트<br>테스트중입니다..</span>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

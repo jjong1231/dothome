@@ -1,40 +1,70 @@
+<?
+//$_home = getcwd();
+$_home = "/host/home3/jjong1231/html";
+
+include $_home."/inc/_inc_Function.php";
+include $_home."/inc/_inc_db.php";
+
+
+$rs = $DB->query("SELECT * FROM test"); // pr($rs); ?>
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>jjong1231.닷홈</title>
-	<style>
-		a { text-decoration: none;}
-	</style>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>jjong1231.닷홈</title>
+    <style>
+      a {
+        text-decoration: none;
+      }
+    </style>
+    <script>
+      var ua = navigator.userAgent.toLowerCase();
+      var is_mobile = Boolean(ua.match(/iphone|ipad|android|mobile/) != null);
+      console.log(is_mobile);
+      if(!is_mobile){
+        // location.href='//www.adplex.co.kr';
+      }
+    </script>
+  </head>
+  <body>
+    <a href="new/index.php">테스트페이지</a>
+    <!-- <hr />
+    <a href="">db연결 테스트</a> -->
 
-<a href="new/index.php">테스트페이지</a>
+    <hr />
+    <h2>템플릿 샘플</h2>
+    <hr />
+    <h3>테스트페이지</h3>
+    <p><a href="/test">/test</a></p>
+    <hr />
+    <h3>fp</h3>
+    <p><a href="/fp">/fp</a></p>
+    <hr />
+    <h3>BootstrapMade</h3>
+    <p></p>
+    <a href="bootstrapmade/Append/">Append</a>
+    <p></p>
+    <a href="bootstrapmade/iPortfolio/">iPortfolio</a>
+    <hr />
+    <h3>html5up</h3>
+    <p></p>
+    <a href="html5up/dimension/">dimension</a>
+    <p></p>
+    <a href="html5up/hyperspace/">hyperspace</a>
+    <p></p>
+    <a href="html5up/multiverse/">multiverse</a>
+    <p></p>
+    <a href="/html5up/paradigm/">paradigm</a>
+    <p></p>
+    <a href="html5up/prologue/">prologue</a>
+    <p></p>
+    <a href="/html5up/stellar/">stellar</a>
 
-
-
-
-<hr>
-<h2>템플릿 샘플</h2>
-<hr>
-<h3>BootstrapMade</h3>
-<p></p><a href="bootstrapmade/Append/">Append</a>
-<p></p><a href="bootstrapmade/iPortfolio/">iPortfolio</a>
-<hr>
-<h3>html5up</h3>
-<p></p><a href="html5up/dimension/">dimension</a>
-<p></p><a href="html5up/hyperspace/">hyperspace</a>
-<p></p><a href="html5up/multiverse/">multiverse</a>
-<p></p><a href="/html5up/paradigm/">paradigm</a>
-<p></p><a href="html5up/prologue/">prologue</a>
-<p></p><a href="/html5up/stellar/">stellar</a>
-
-<hr>
-<h3>샘플</h3>
-<p></p><a href="sample/firebase_chat/">firebase_chat</a>
-<!-- <p></p><a href="sample/talktalk/">talktalk</a> -->
-
-</body>
+    <hr />
+    <h3>샘플</h3>
+    <p></p>
+    <a href="sample/firebase_chat/">firebase_chat</a>
+    <!-- <p></p><a href="sample/talktalk/">talktalk</a> -->
+  </body>
 </html>
-

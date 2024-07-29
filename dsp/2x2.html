@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2x2 Grid Layout</title>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script>
+      // var zoneData = {
+      //   zone_cfg: {
+      //     zcode: "QI4LLLLF",
+      //     width: 325, //영역 가로사이즈
+      //     height: 250, //영역 세로사이즈
+      //     slot_num_w: 2, //슬롯 가로갯수
+      //     slot_num_h: 2, //슬롯 세로갯수
+      //     bn_type: 2, // 0:이미지, 1:텍스트, 2:썸네일
+      //     img_txt_gap: 3, //이미지,텍스트 간격
+      //     font_size: 16, //폰트사이즈(==line-height)
+      //     font_align: "center",
+      //     eff_layer: true, //와이드배너(true:100%,false:고정사이즈)
+      //   },
+      //   matData: [
+      //     {
+      //       img: "https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif",
+      //       txt: "1썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다",
+      //     },
+      //     {
+      //       img: "https://plugin.adplex.co.kr/banner/1837/de929547a089466995dc9ba7677fdda2.gif",
+      //       txt: "2썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다",
+      //     },
+      //     {
+      //       img: "https://plugin.adplex.co.kr/banner/1837/bccfcdd45e3611599ccb10574e1743dc.gif",
+      //       txt: "3썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다",
+      //     },
+      //     {
+      //       img: "https://plugin.adplex.co.kr/banner/1837/a83c5f540b4c6200f72feae8eb786936.png",
+      //       txt: "4썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다",
+      //     },
+      //   ],
+      // };
+    </script>
+
+    <script>
+      ((w) => {
+        "use strict";
+        var doc = w.document;
+
+        // w.adtiveDSP =
+        //   w.adtiveDSP ||
+        //   function () {
+        //     console.log(111);
+        //   };
+
+        //디바이스 정보
+        var UA = (function () {
+          var ua = navigator.userAgent.toLowerCase();
+          var res = {
+            touchDevice: "ontouchstart" in window,
+            mobile: Boolean(ua.match(/iphone|ipad|android|mobile/) != null),
+            appleDevice: Boolean(ua.match(/ mac os /) != null),
+            ie: Boolean(ua.match(/trident|msie/) != null),
+            chrome: Boolean(ua.match(/chrome/) != null),
+          };
+          res.safari = Boolean(ua.match(/safari/) != null && !res.chrome);
+          return res;
+        })();
+
+        var adtiveDSP = {
+          //초기화 설정
+          init: function () {
+            var that = this;
+          },
+          mkbanner: (zcode, selector, cb) => {
+            console.warn(zcode, selector, cb);
+            //영역 데이터가져오기
+            let url = "https://www.adplex.co.kr/_pjh/get_data.php";
+            let callbackName = "CB" + parseInt(Math.random() * 100000000);
+            let script = doc.createElement("script");
+            window[callbackName] = function (data) {
+              var automat = JSON.parse(data.automat);
+              console.warn(automat);
+
+              var styleEl = doc.createElement("style");
+              /*
+            썸네일 높이구하는 방법
+            1슬롯의 높이값 = (전체 높이값-슬롯간격)/세로슬롯갯수
+            텍스트 높이값 = 폰트사이즈*2
+            이미지 텍스트간격 = 셋팅값
+            이미지 높이 = 1슬롯의 높이값-(텍스트 높이값+이미지 텍스트간격)
+            와이드배너 true일때 영역 가로사이즈 100%
+            */
+
+              var zone_cfg = data.cfg,
+                arr_mat = data.mat;
+              console.log(zone_cfg);
+              // prettier-ignore
+              var zcode = zone_cfg.zcode,
+              zone_w = zone_cfg.eff_layer ? "100%" : zone_cfg.width+"px",
+              zone_h = zone_cfg.height+"px",
+              slot_num_w = zone_cfg.slot_num_w,
+              slot_num_h = zone_cfg.slot_num_h,
+              mat_cnt = slot_num_w*slot_num_h,
+              slot_h = (zone_cfg.height-(4*(slot_num_h-1))) / slot_num_h,
+              img_txt_gap = zone_cfg.img_txt_gap,
+              text_h = zone_cfg.font_size * 2,
+              font_align = zone_cfg.font_align,
+              slot_min_w = (zone_cfg.width - (4*slot_num_w-1)) / slot_num_w,
+              img_h = slot_h - (text_h + img_txt_gap) + "px",
+              text_line_height = (zone_cfg.line_height ? zone_cfg.line_height : zone_cfg.font_size) + "px",
+              container_gap = 4;
+
+              // prettier-ignore
+              var elmID = "adtiveDSP_" + zcode;
+
+              // prettier-ignore
+              var cssText = "#" + elmID + " { margin: 0; padding: 0; width: " + zone_w + "; height: " + zone_h + "; display: flex; justify-content: center; align-items: center; } .container { display: grid; grid-template-columns: repeat(" + slot_num_w + ", 1fr); grid-template-rows: repeat(" + slot_num_h + ", auto); gap: "+container_gap+"px; width: 100%; max-width: 1200px; } .item { min-width: " + slot_min_w + "px; background-color: #fff; overflow: hidden; display: flex; flex-direction: column; align-items: center; } .item_img { height: " + img_h + "; overflow: hidden; display: flex; justify-content: center; align-items: center; } .item_img img { height: " + img_h + "; object-fit: cover; } .item_text { width: " + (slot_min_w - 20) + "px; height: " + text_h + "px; margin-top: " + img_txt_gap + "px; text-align: " + font_align + "; font-family:'맑은 고딕','Malgun Gothic','돋움',Dotum,'굴림',Gulim,Helvetica,sans-serif; line-height: " + text_line_height + "; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }";
+              styleEl.innerText = cssText;
+              doc.head.appendChild(styleEl);
+
+              //영역 삽입
+              // prettier-ignore
+              doc.currentScript.insertAdjacentHTML('afterend','<div id='+elmID+'><div class=container></div></div>');
+              var outer_elmID = doc.getElementById(elmID);
+              var inner_container =
+                outer_elmID.getElementsByClassName("container")[0];
+
+              ///////////////////////////////////////////////////
+              //자동소재로 테스트
+              if (false) {
+                arr_mat = [];
+                automat.forEach((v, i) => {
+                  if (i > 3) return false;
+                  // prettier-ignore
+                  arr_mat.push({
+                    img: "https://plugin.adplex.co.kr/banner/" + decodeURIComponent(v.image),
+                    txt: decodeURI(v.text),
+                    landurl: decodeURI(v.landurl)
+                  });
+                });
+              }
+              ///////////////////////////////////////////////////
+
+              //슬롯 삽입
+              // prettier-ignore
+              arr_mat.forEach((v, i) => {
+                console.log(i, v);
+                if (i >= mat_cnt) return false; //슬롯수 만큼만 소재 가져옴 
+
+                var tmp_item = document.createElement('div'); //item 생성
+                tmp_item.className = "item";
+                tmp_item.innerHTML = `<div class="item_img"><img src="` + v.img + `" alt="" /></div> <div class="item_text">` + v.txt + `</div>`;
+                tmp_item.addEventListener('click',function(){
+                  //이벤트 로그 전송
+                  alert(v.landurl);
+                });
+                inner_container.appendChild(tmp_item);
+              });
+            };
+            // prettier-ignore
+            script.src = url + "?jsoncallback=" + callbackName + "&zoneCD=" + zcode;
+            doc.body.appendChild(script);
+          },
+        };
+
+        adtiveDSP.init();
+        // prettier-ignore
+        w.adtiveDSP=w.adtiveDSP||function(zcode,selector,cb){adtiveDSP.mkbanner(zcode,selector,cb)}
+
+        $(function () {
+          // $('#rs').text(JSON.stringify(UA));
+        });
+      })(window);
+    </script>
+
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+      }
+      .box {
+        height: 100px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box">box1</div>
+    <script>
+      // prettier-ignore
+      try{ adtiveDSP('QI4LLLLF')}catch(e){console.log(e);}
+    </script>
+    <!-- 
+<div id="zone">
+      <div class="container">
+        <div class="item">
+          <div class="item_img">
+            <img
+              src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+              alt="Thumbnail Image 2"
+            />
+          </div>
+          <div class="item_text">
+            썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다
+          </div>
+        </div>
+        <div class="item">
+          <div class="item_img">
+            <img
+              src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+              alt="Thumbnail Image 2"
+            />
+          </div>
+          <div class="item_text">
+            <span
+              >썸네일 텍스트썸네일 텍스트썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다</span
+            >
+          </div>
+        </div>
+        <div class="item">
+          <div class="item_img">
+            <img
+              src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+              alt="Thumbnail Image 2"
+            />
+          </div>
+          <div class="item_text">
+            <span
+              >썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다</span
+            >
+          </div>
+        </div>
+        <div class="item">
+          <div class="item_img">
+            <img
+              src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+              alt="Thumbnail Image 2"
+            />
+          </div>
+          <div class="item_text">
+            <span
+              >썸네일 텍스트<br />테스트중입니다테스트중입니다테스트중입니다</span
+            >
+          </div>
+        </div>
+      </div>
+    </div> -->
+
+    <div class="box">box2</div>
+  </body>
+</html>
+
+<!-- 
+
+      #zone {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 250px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, auto);
+        gap: 4px;
+        width: 90%;
+        max-width: 1200px;
+      }
+      .item {
+        min-width: 155px;
+        background-color: #fff;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .item_img {
+        height: "+img_h+";
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+      .item_img img {
+        height: 85px;
+        object-fit: cover;
+      }
+      .item_text {
+        width: 142px;
+        height: "+text_h+";
+        padding-top: 5px;
+        item_text-align: center;
+        line-height: 16px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+-->

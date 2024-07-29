@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Thumbnail Image</title>
+    <style>
+      body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+      }
+
+      .thumbnail-container {
+        width: 200px; /* 썸네일 컨테이너의 너비 */
+        height: 200px; /* 썸네일 컨테이너의 높이 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden; /* 컨테이너를 벗어나는 부분을 숨김 */
+        border: 1px solid #ccc; /* 테두리 추가 */
+        border-radius: 10px; /* 모서리 둥글게 */
+      }
+
+      .thumbnail-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* 이미지가 컨테이너를 꽉 채우도록 */
+      }
+    </style>
+  </head>
+  <body>
+    <div class="thumbnail-container">
+      <img
+        src="https://plugin.adplex.co.kr/banner/1837/d808d1aaa74baa71525ffffa4f7f8ad9.gif"
+        alt="Thumbnail Image"
+        class="thumbnail-image"
+      />
+    </div>
+  </body>
+</html>
