@@ -10,7 +10,6 @@ header("Access-Control-Allow-Headers: Content-Type, Authorization");
 
 //$_home = getcwd();
 $_home = "/host/home3/jjong1231/html";
-
 include $_home."/inc/_inc_Function.php";
 include $_home."/inc/_inc_db.php";
 
